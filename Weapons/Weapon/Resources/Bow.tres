@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://7ecyrmaiduki"]
+
+[ext_resource type="Script" path="res://Weapons/Weapon/WeaponStats.gd" id="1_3ws2u"]
+[ext_resource type="Texture2D" uid="uid://bcb14dc22utie" path="res://_Placeholders/Bow.png" id="2_pcnuv"]
+
+[resource]
+script = ExtResource("1_3ws2u")
+type = 1
+texture = ExtResource("2_pcnuv")
+name = "Bow"

@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://cl6kuvs3djd1b"]
+
+[ext_resource type="Script" path="res://Player/ClimbDetector/ClimbDetector.gd" id="1_yfchg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_inaq0"]
+size = Vector2(10, 38)
+
+[node name="ClimbDetector" type="Marker2D"]
+position = Vector2(0, -15)
+script = ExtResource("1_yfchg")
+
+[node name="PlatformDetector" type="RayCast2D" parent="."]
+position = Vector2(0, -26)
+target_position = Vector2(0, -5)
+collision_mask = 4
+
+[node name="RayTop" type="RayCast2D" parent="."]
+position = Vector2(9, -30)
+target_position = Vector2(5, 0)
+collision_mask = 6
+
+[node name="RayBottom" type="RayCast2D" parent="."]
+position = Vector2(9, -24)
+target_position = Vector2(5, 0)
+collision_mask = 6
+
+[node name="FloorDetector" type="RayCast2D" parent="."]
+position = Vector2(0, 13)
+target_position = Vector2(0, 10)
+collision_mask = 4
+
+[node name="LadderDetector" type="Area2D" parent="."]
+position = Vector2(0, -4)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderDetector"]
+shape = SubResource("RectangleShape2D_inaq0")

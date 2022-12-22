@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://d0naknvgpmvh0"]
+
+[ext_resource type="Script" path="res://Main/GameplayEvents.gd" id="1_ojwfm"]
+
+[resource]
+script = ExtResource("1_ojwfm")

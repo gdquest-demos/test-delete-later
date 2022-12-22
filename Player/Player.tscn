@@ -1,0 +1,209 @@
+[gd_scene load_steps=40 format=3 uid="uid://byxqdx1p4b4c2"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_odc25"]
+[ext_resource type="Resource" uid="uid://d0naknvgpmvh0" path="res://Main/GameplayEvents.tres" id="2_1ov6k"]
+[ext_resource type="Resource" uid="uid://bfgvksxi2nc71" path="res://Player/PlayerStats.tres" id="2_evahh"]
+[ext_resource type="Resource" uid="uid://bphooj1csgacd" path="res://Main/MainInstances.tres" id="2_kmfji"]
+[ext_resource type="PackedScene" uid="uid://dkomkkpr4gyol" path="res://Player/PlayerSkin/PlayerSkin.tscn" id="2_wh2le"]
+[ext_resource type="Script" path="res://StateMachine/StateMachine.gd" id="3_y1seh"]
+[ext_resource type="Script" path="res://Player/States/Movement.gd" id="4_0bket"]
+[ext_resource type="Resource" uid="uid://hqlgxcadadwf" path="res://Inventory/Inventory.tres" id="4_baoqu"]
+[ext_resource type="PackedScene" uid="uid://cl6kuvs3djd1b" path="res://Player/ClimbDetector/ClimbDetector.tscn" id="4_vwvq5"]
+[ext_resource type="Script" path="res://Player/States/Movement/Ground.gd" id="5_r83cs"]
+[ext_resource type="Resource" uid="uid://bbbacsd1rdyii" path="res://Weapons/Weapon/Resources/Sword.tres" id="5_tpr5e"]
+[ext_resource type="Script" path="res://Components/HurtBox/HurtBox.gd" id="5_ugpr3"]
+[ext_resource type="Script" path="res://Components/BlockBox/BlockBox.gd" id="6_n2pi3"]
+[ext_resource type="Script" path="res://Player/Equipment.gd" id="6_xkfxg"]
+[ext_resource type="Script" path="res://Player/States/Movement/Air.gd" id="7_fu1sf"]
+[ext_resource type="Script" path="res://Player/CollisionBoxes.gd" id="10_f043t"]
+[ext_resource type="Script" path="res://Components/HitBox/HitBox.gd" id="10_s0jng"]
+[ext_resource type="Script" path="res://Player/PlayerState.gd" id="11_8dcgm"]
+[ext_resource type="Script" path="res://Player/States/Action/Dodge.gd" id="11_413fb"]
+[ext_resource type="Script" path="res://Player/States/Action/LedgeGrab.gd" id="12_ncphf"]
+[ext_resource type="Script" path="res://Player/States/Action/ClimbPlatform.gd" id="13_u0y6d"]
+[ext_resource type="PackedScene" uid="uid://e5ls6xh6x23i" path="res://Weapons/Projectiles/Arrow.tscn" id="14_duwq5"]
+[ext_resource type="Script" path="res://Player/States/Action/Ladder.gd" id="14_nhhqv"]
+[ext_resource type="Script" path="res://Player/States/Weapon/Sword.gd" id="15_obpq0"]
+[ext_resource type="Script" path="res://Player/States/Action/SlamAir.gd" id="15_xgyo6"]
+[ext_resource type="Script" path="res://Player/States/Weapon/Sword/Combo1.gd" id="16_j7cvg"]
+[ext_resource type="Script" path="res://Player/States/Action/SlamHit.gd" id="16_vx71r"]
+[ext_resource type="Script" path="res://Player/States/Weapon/Sword/Combo2.gd" id="17_vd4fk"]
+[ext_resource type="Script" path="res://Player/States/Weapon/Sword/Combo3.gd" id="18_n4elp"]
+[ext_resource type="Script" path="res://Player/States/Weapon/Bow.gd" id="19_pr7kx"]
+[ext_resource type="Script" path="res://Player/States/Weapon/Shield.gd" id="21_448ky"]
+[ext_resource type="Script" path="res://Player/States/Hit/Damage.gd" id="22_55qr4"]
+[ext_resource type="Script" path="res://Player/States/Hit/Die.gd" id="23_u1wqh"]
+[ext_resource type="Script" path="res://Player/States/Hit/Block.gd" id="25_sjqbl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8nfjb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wgysd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jhqf2"]
+size = Vector2(68, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtl8v"]
+size = Vector2(10, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmi1v"]
+size = Vector2(10, 50)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_odc25")
+main_instances = ExtResource("2_kmfji")
+gameplay_events = ExtResource("2_1ov6k")
+stats = ExtResource("2_evahh")
+skin_path = NodePath("PlayerSkin")
+
+[node name="Equipment" type="Marker2D" parent="."]
+script = ExtResource("6_xkfxg")
+inventory = ExtResource("4_baoqu")
+initial_weapon = ExtResource("5_tpr5e")
+movement_state_path = NodePath("../StateMachine/Movement")
+
+[node name="ActionsDetector" type="Area2D" parent="Equipment"]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Equipment/ActionsDetector"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_8nfjb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_wgysd")
+
+[node name="PlayerSkin" parent="." instance=ExtResource("2_wh2le")]
+
+[node name="ClimbDetector" parent="." instance=ExtResource("4_vwvq5")]
+
+[node name="CollisionBoxes" type="Marker2D" parent="."]
+script = ExtResource("10_f043t")
+
+[node name="HitBox" type="Area2D" parent="CollisionBoxes"]
+position = Vector2(23, -21)
+collision_layer = 128
+collision_mask = 0
+monitoring = false
+script = ExtResource("10_s0jng")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBoxes/HitBox"]
+shape = SubResource("RectangleShape2D_jhqf2")
+disabled = true
+
+[node name="ProjectileSpawner" type="Marker2D" parent="CollisionBoxes"]
+position = Vector2(21, -27)
+
+[node name="HurtBox" type="Area2D" parent="CollisionBoxes"]
+position = Vector2(0, -20)
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+script = ExtResource("5_ugpr3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBoxes/HurtBox"]
+shape = SubResource("RectangleShape2D_qtl8v")
+
+[node name="Timer" type="Timer" parent="CollisionBoxes/HurtBox"]
+one_shot = true
+
+[node name="BlockBox" type="Area2D" parent="CollisionBoxes"]
+position = Vector2(1, 0)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("6_n2pi3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBoxes/BlockBox"]
+position = Vector2(12, -21)
+shape = SubResource("RectangleShape2D_pmi1v")
+disabled = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_y1seh")
+initial_state = NodePath("Movement/Air")
+
+[node name="Movement" type="Node" parent="StateMachine"]
+script = ExtResource("4_0bket")
+
+[node name="Ground" type="Node" parent="StateMachine/Movement"]
+script = ExtResource("5_r83cs")
+
+[node name="Air" type="Node" parent="StateMachine/Movement"]
+script = ExtResource("7_fu1sf")
+
+[node name="CoyoteTimer" type="Timer" parent="StateMachine/Movement/Air"]
+process_callback = 0
+wait_time = 0.15
+one_shot = true
+
+[node name="Ladder" type="Node" parent="StateMachine/Movement"]
+script = ExtResource("14_nhhqv")
+
+[node name="Action" type="Node" parent="StateMachine"]
+script = ExtResource("11_8dcgm")
+
+[node name="Dodge" type="Node" parent="StateMachine/Action"]
+script = ExtResource("11_413fb")
+
+[node name="Timer" type="Timer" parent="StateMachine/Action/Dodge"]
+process_callback = 0
+wait_time = 0.15
+one_shot = true
+
+[node name="LedgeGrab" type="Node" parent="StateMachine/Action"]
+script = ExtResource("12_ncphf")
+
+[node name="ClimbPlatform" type="Node" parent="StateMachine/Action"]
+script = ExtResource("13_u0y6d")
+
+[node name="SlamAir" type="Node" parent="StateMachine/Action"]
+script = ExtResource("15_xgyo6")
+
+[node name="SlamHit" type="Node" parent="StateMachine/Action"]
+script = ExtResource("16_vx71r")
+
+[node name="Weapon" type="Node" parent="StateMachine"]
+script = ExtResource("11_8dcgm")
+
+[node name="Sword" type="Node" parent="StateMachine/Weapon"]
+script = ExtResource("15_obpq0")
+
+[node name="Combo1" type="Node" parent="StateMachine/Weapon/Sword"]
+script = ExtResource("16_j7cvg")
+
+[node name="Timer" type="Timer" parent="StateMachine/Weapon/Sword/Combo1"]
+process_callback = 0
+wait_time = 0.3
+one_shot = true
+
+[node name="Combo2" type="Node" parent="StateMachine/Weapon/Sword"]
+script = ExtResource("17_vd4fk")
+
+[node name="Timer" type="Timer" parent="StateMachine/Weapon/Sword/Combo2"]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="Combo3" type="Node" parent="StateMachine/Weapon/Sword"]
+script = ExtResource("18_n4elp")
+
+[node name="Bow" type="Node" parent="StateMachine/Weapon"]
+script = ExtResource("19_pr7kx")
+arrow_scene = ExtResource("14_duwq5")
+
+[node name="Shield" type="Node" parent="StateMachine/Weapon"]
+script = ExtResource("21_448ky")
+
+[node name="Hit" type="Node" parent="StateMachine"]
+script = ExtResource("11_8dcgm")
+
+[node name="Block" type="Node" parent="StateMachine/Hit"]
+script = ExtResource("25_sjqbl")
+
+[node name="Damage" type="Node" parent="StateMachine/Hit"]
+script = ExtResource("22_55qr4")
+
+[node name="Die" type="Node" parent="StateMachine/Hit"]
+script = ExtResource("23_u1wqh")

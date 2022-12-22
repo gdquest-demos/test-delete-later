@@ -1,0 +1,167 @@
+[gd_scene load_steps=18 format=3 uid="uid://c0teve3onmoht"]
+
+[ext_resource type="Texture2D" uid="uid://celnqi3b5puhu" path="res://_Placeholders/example.png" id="1_3ebyg"]
+[ext_resource type="PackedScene" uid="uid://byxqdx1p4b4c2" path="res://Player/Player.tscn" id="1_m6lnc"]
+[ext_resource type="Texture2D" uid="uid://cgsjgivsn6tlb" path="res://_Placeholders/ladder.png" id="5_e1dlv"]
+[ext_resource type="PackedScene" uid="uid://deidhggm81kjo" path="res://Weapons/Weapon/Weapon.tscn" id="6_wytlk"]
+[ext_resource type="Resource" uid="uid://7ecyrmaiduki" path="res://Weapons/Weapon/Resources/Bow.tres" id="8_3q5ij"]
+[ext_resource type="PackedScene" uid="uid://rxethup6ojh3" path="res://Enemies/Goblin/Goblin.tscn" id="8_dpf80"]
+[ext_resource type="Resource" uid="uid://d1eppheb7tvhf" path="res://Weapons/Weapon/Resources/Shield.tres" id="9_imoq6"]
+[ext_resource type="PackedScene" uid="uid://ctxhfm1dgkiqd" path="res://UI/HUD/HUD.tscn" id="11_qppcq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jphll"]
+size = Vector2(258, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b6yj"]
+size = Vector2(110, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6j3m"]
+size = Vector2(110, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0tbm"]
+size = Vector2(288, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yk48v"]
+size = Vector2(115, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1u1p5"]
+size = Vector2(15, 404)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecawv"]
+size = Vector2(676, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70w5t"]
+size = Vector2(14, 195)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0u2lq"]
+size = Vector2(72, 8.75)
+
+[node name="Game" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(321, 200.562)
+scale = Vector2(0.374884, 0.374884)
+texture = ExtResource("1_3ebyg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(318, 378)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-199, 0)
+shape = SubResource("RectangleShape2D_jphll")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-268, -76)
+shape = SubResource("RectangleShape2D_0b6yj")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-50, -234)
+shape = SubResource("RectangleShape2D_k6j3m")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(184, 0)
+shape = SubResource("RectangleShape2D_i0tbm")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-14.5, 13)
+shape = SubResource("RectangleShape2D_yk48v")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-326.5, -177)
+shape = SubResource("RectangleShape2D_1u1p5")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(4, -386)
+shape = SubResource("RectangleShape2D_ecawv")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(334, -177)
+shape = SubResource("RectangleShape2D_1u1p5")
+
+[node name="Ladder" type="StaticBody2D" parent="."]
+position = Vector2(98, 122)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder"]
+position = Vector2(0, -25.5)
+shape = SubResource("RectangleShape2D_70w5t")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ladder"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, -106)
+texture = ExtResource("5_e1dlv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Ladder"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, -57)
+texture = ExtResource("5_e1dlv")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Ladder"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, -9)
+texture = ExtResource("5_e1dlv")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Ladder"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(0, 39)
+texture = ExtResource("5_e1dlv")
+
+[node name="Bow" parent="." instance=ExtResource("6_wytlk")]
+position = Vector2(151, 334)
+stats = ExtResource("8_3q5ij")
+
+[node name="Shield" parent="." instance=ExtResource("6_wytlk")]
+position = Vector2(209, 334)
+stats = ExtResource("9_imoq6")
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(141, 250)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(0, 4.625)
+shape = SubResource("RectangleShape2D_0u2lq")
+one_way_collision = true
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(177, 106)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+position = Vector2(0, 4.625)
+shape = SubResource("RectangleShape2D_0u2lq")
+one_way_collision = true
+
+[node name="Player" parent="." instance=ExtResource("1_m6lnc")]
+position = Vector2(31, 235)
+
+[node name="Goblin" parent="." instance=ExtResource("8_dpf80")]
+position = Vector2(508, 346)
+
+[node name="Goblin2" parent="." instance=ExtResource("8_dpf80")]
+position = Vector2(406, 346)
+
+[node name="Goblin3" parent="." instance=ExtResource("8_dpf80")]
+position = Vector2(603, 346)
+
+[node name="Goblin4" parent="." instance=ExtResource("8_dpf80")]
+position = Vector2(304, 104)
+
+[node name="Goblin5" parent="." instance=ExtResource("8_dpf80")]
+position = Vector2(229, 105)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("11_qppcq")]

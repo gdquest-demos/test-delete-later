@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://d1eppheb7tvhf"]
+
+[ext_resource type="Script" path="res://Weapons/Weapon/WeaponStats.gd" id="1_0ncxi"]
+[ext_resource type="Texture2D" uid="uid://b7jr5ftxyngq1" path="res://_Placeholders/Iron Shield.png" id="2_6quba"]
+
+[resource]
+script = ExtResource("1_0ncxi")
+type = 2
+texture = ExtResource("2_6quba")
+name = "Shield"

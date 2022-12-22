@@ -1,0 +1,117 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctxhfm1dgkiqd"]
+
+[ext_resource type="Script" path="res://UI/HUD/HUD.gd" id="1_qu2d3"]
+[ext_resource type="Resource" uid="uid://hqlgxcadadwf" path="res://Inventory/Inventory.tres" id="2_a273p"]
+[ext_resource type="Resource" uid="uid://bfgvksxi2nc71" path="res://Player/PlayerStats.tres" id="3_krpxp"]
+
+[node name="HUD" type="Panel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -75.0
+offset_right = 153.0
+offset_bottom = -9.0
+grow_vertical = 0
+script = ExtResource("1_qu2d3")
+inventory = ExtResource("2_a273p")
+player_stats = ExtResource("3_krpxp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = -9.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EquipmentContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+offset_right = 127.0
+offset_bottom = 42.0
+size_flags_vertical = 3
+
+[node name="PrimaryWeapon" type="Panel" parent="VBoxContainer/EquipmentContainer"]
+layout_mode = 2
+offset_right = 61.0
+offset_bottom = 42.0
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/EquipmentContainer/PrimaryWeapon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/EquipmentContainer/PrimaryWeapon"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 62.0
+grow_vertical = 0
+text = "Prm"
+
+[node name="SecondaryWeapon" type="Panel" parent="VBoxContainer/EquipmentContainer"]
+layout_mode = 2
+offset_left = 65.0
+offset_right = 127.0
+offset_bottom = 42.0
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/EquipmentContainer/SecondaryWeapon"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/EquipmentContainer/SecondaryWeapon"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 62.0
+grow_vertical = 0
+text = "Sec"
+
+[node name="HealthContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+offset_top = 46.0
+offset_right = 127.0
+offset_bottom = 50.0
+size_flags_vertical = 8
+alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HealthContainer"]
+layout_mode = 2
+offset_right = 127.0
+offset_bottom = 4.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 5.0
+step = 1.0
+value = 5.0
+rounded = true
+show_percentage = false

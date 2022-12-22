@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bbbacsd1rdyii"]
+
+[ext_resource type="Script" path="res://Weapons/Weapon/WeaponStats.gd" id="1_oj07m"]
+[ext_resource type="Texture2D" uid="uid://btpn3iuf3drfa" path="res://_Placeholders/Iron Sword.png" id="2_xhfnb"]
+
+[resource]
+script = ExtResource("1_oj07m")
+type = 0
+texture = ExtResource("2_xhfnb")
+name = "Sword"
+h_frames = 1
+v_frames = 1
+frame = 0
